@@ -1,3 +1,5 @@
+##Docker + Ganglia + Nginx
+
 ###to build image from Docker 
 git clone https://github.com/n0needt0/docker-ganglia.git
 cd docker-ganglia
@@ -8,16 +10,15 @@ docker build -t n0needt0/docker-ganglia .
 
 ###setup host
 
-##create required data directory on the host:  
-##this is where ganglia data will live, so it can survive redeployments
-##this is schema i use on my hosts like so /srv/doker/CONTAINER_NAME/..local dir on container..
+create required data directory on the host:  
+this is where ganglia data will live, so it can survive redeployments
+this is schema i use on my hosts like so /srv/doker/CONTAINER_NAME/..local dir on container..
 
 mkdir -p /srv/docker/ganglia/var/lib/ganglia/rrds
 chown -R nobody /srv/docker/ganglia/var/lib/ganglia/rrds
 
-##other optional directories where your custom configuration files may live
-
 ### Mounted Volumes
+other optional directories where your custom configuration files may live
 
 Host              | Container                  | Notes
 ----------------- | -------------------------- | -------------------------------
