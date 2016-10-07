@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -f /var/run/gmetad.pid
+exec /usr/sbin/gmetad --pid-file=/var/run/gmetad.pid

@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -f /var/run/ganglia-monitor.pid
+exec /usr/sbin/gmond --pid-file=/var/run/ganglia-monitor.pid
