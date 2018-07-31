@@ -1,21 +1,10 @@
-##Docker + Ganglia + Nginx
+##Docker + Ganglia
 
-###to build image from Docker 
-git clone https://github.com/n0needt0/docker-ganglia.git
-cd docker-ganglia
-
-###build as root
-sudo -s 
-docker build -t n0needt0/docker-ganglia .
-
-###setup host
-
-create required data directory on the host:  
-this is where ganglia data will live, so it can survive redeployments
-this is schema i use on my hosts like so /srv/doker/CONTAINER_NAME/..local dir on container..
-
+mkdir -p /srv/docker/ganglia/var/lib/ganglia
+mkdir -p /srv/docker/ganglia/var/log
 mkdir -p /srv/docker/ganglia/var/lib/ganglia/rrds
 chown -R nobody /srv/docker/ganglia/var/lib/ganglia/rrds
+docker run -d --name ganglia --restart=always -v /srv/docker/ganglia/var/lib/ganglia:/var/lib/ganglia -v /srv/docker/ganglia/var/log:/var/log -p 80:80 -p 8649:8649/udp n0needt0/docker-ganglia
 
 ### Mounted Volumes
 other optional directories where your custom configuration files may live
@@ -46,13 +35,14 @@ docker run -d --name ganglia \
 --restart=always \
 -v /srv/docker/ganglia/var/lib/ganglia:/var/lib/ganglia \
 -v /srv/docker/ganglia/var/log:/var/log \
--p 8484:80 -p 8649:8649/udp \
+-p 80:80 -p 8649:8649/udp \
 n0needt0/docker-ganglia
 ```
 
 ###Test installation
 
-go to http://dockerhost:8484
+go to http://dockerhost
+
 
 you should see single node, the ganglia containr itself "monitor"
 after a while you should see data..
